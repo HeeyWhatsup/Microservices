@@ -1,0 +1,79 @@
+{
+    "$schema": "https://www.krakend.io/schema/v3.json",
+    "version": 3,
+    "endpoints": [
+        {  
+            "endpoint": "/v1/musics",
+            "method": "GET",
+            "backend": [{
+                "url_pattern": "/v1/musics",
+                "method": "GET",
+                "host": ["http://musics"],
+                "is_collection": true,
+                "mapping": {
+                    "collection": "musics"
+                }
+            }]
+        },
+        {  
+            "endpoint": "/v1/musics/{id}",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "backend": [{
+                "url_pattern": "/v1/musics/{id}",
+                "method": "GET",
+                "host": ["http://musics"]
+            }]
+        },
+
+        {  
+            "endpoint": "/v1/authors",
+            "method": "GET",
+            "backend": [{
+                "url_pattern": "/v1/auth",
+                "method": "GET",
+                "host": ["http://authors"],
+                "is_collection": true,
+                "mapping": {
+                    "collection": "authors"
+                }
+            }]
+        },
+        {  
+            "endpoint": "/v1/authors/{id}",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "backend": [{
+                "url_pattern": "/v1/auth/{id}",
+                "method": "GET",
+                "host": ["http://authors"]
+            }]
+        },
+
+        {
+            "endpoint": "/v1/data",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/v1/musics",
+                    "method": "GET",
+                    "host": ["http://musics"],
+                    "is_collection": true,
+                    "mapping": {
+                        "collection": "musics"
+                    }
+                },
+                {
+                    "url_pattern": "/v1/auth",
+                    "method": "GET",
+                    "host": ["http://authors"],
+                    "is_collection": true,
+                    "mapping": {
+                        "collection": "authors"
+                    }
+                }
+            ]
+        }
+    ],
+    "extra_config": {}
+}
